@@ -2,7 +2,7 @@
 data=$(date +%d-%m-%Y)
 log="/var/log/backup/bkp_full-$data.log"
 data=$(date +%d-%m-%Y+%H:%M)
-senha_log="novainfo@@)!)"
+senha_log=""
 
 echo "INICIO DO BACKUP COMPLETO DA REDE EM $data" >>$log
 
