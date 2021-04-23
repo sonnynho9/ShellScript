@@ -1,6 +1,6 @@
 #!/bin/bash
 usuario="administrador"
-password="sede1111"
+password=""
 dom="WORKGROUP"
 
 for locais in $(cat /home/egomes/scripts/locais | cut -f1 -d ':') 
