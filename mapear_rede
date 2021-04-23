@@ -1,0 +1,12 @@
+#!/bin/bash
+usuario="administrador"
+password="sede1111"
+dom="WORKGROUP"
+
+for locais in $(cat /home/egomes/scripts/locais | cut -f1 -d ':') 
+do 
+ ip=$(grep ^$locais: /home/egomes/scripts/locais | cut -f2 -d ':')
+ local=$(grep ^$locais: /home/egomes/scripts/locais | cut -f3 -d ':')
+ localc=$(grep ^$locais: /home/egomes/scripts/locais | cut -f4 -d ':')
+ mount --verbose -t cifs -o user=$usuario,password=$senha,dom=$dominio,ro //$ip$local $localc
+done

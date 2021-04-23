@@ -1,0 +1,14 @@
+#!/bin/bash
+data=$(date +%d-%m-%Y)
+log="/var/log/backup/bkp_full-$data.log"
+data=$(date +%d-%m-%Y+%H:%M)
+senha_log="novainfo@@)!)"
+
+echo "INICIO DO BACKUP COMPLETO DA REDE EM $data" >>$log
+
+
+echo "INICIANDO COPIA DO BACKUP GRUPOS EM $data" >>$log
+cp -uvfa /mnt/servidor/grupos /mnt/storage/mnt/servidor 2>>$log
+
+data=$(date +%d-%m-%Y+%H:%M)
+echo "TERMINO DO BACKUP COMPLETO DA REDE EM $data" >>$log

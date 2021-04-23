@@ -1,0 +1,23 @@
+#!/bin/bash
+data=$(date +%d-%m-%Y)
+log="/var/log/backup/bkp_increment-$data.log"
+echo "INICIANDO BACKUP INCREMENTAL EM $(date +%d-%m-%Y+%H:%M)" >>$log
+/backup/mylog "INICIANDO BACKUP INCREMENTAL"
+
+
+for locais in $(cat /backup/locais | cut -f1 -d':') 
+do
+ echo "BACKUP - $locais - $(date +%d-%m-%Y+%H:%M)" >>$log
+ /backup/mylog "BACKUP - $locais" 
+ find $(grep ^$locais: /backup/locais | cut -f4 -d':') -mtime -1 -type f -exec cp -rv --parents {} /mnt/storage \; 2>/tmp/err$$ >/tmp/$$
+ #/mnt/storage
+ erros=`wc -l /tmp/err$$ | cut -f1 -d ' '`
+ arquivos=`wc -l /tmp/$$ | cut -f1 -d ' '`
+ /backup/mylog "ERROS = $erros ARQUIVOS COPIADOS = $arquivos"
+ cat /tmp/err$$ >>$log
+ cat /tmp/$$ >>$log
+done
+
+echo "TERMINO DOS BACKUPS INCREMENTAIS EM $(date +%d-%m-%Y+%H:%M)" >>$log
+/backup/mylog "TERMINO DOS BACKUPS INCREMENTAIS"
+
